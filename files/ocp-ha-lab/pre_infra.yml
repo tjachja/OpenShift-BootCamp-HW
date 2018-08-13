@@ -1,0 +1,18 @@
+- name: Step 000 Pre Infrastructure
+  hosts: localhost
+  connection: local
+  become: false
+  vars_files:
+    - "./env_vars.yml"
+  tags:
+    - step000
+    - pre_infrastructure
+  tasks:
+    - debug:
+        msg: "Step 000 Pre Infrastructure - Copying inventory file to /etc/ansible/hosts"
+    - name: example copying file with owner and permissions
+      copy:
+        src: ./inventory/hosts
+        dest: /etc/ansible/hosts
+    - shell: ansible-playbook -f 20 /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml
+    - shell: ansible-playbook -f 20 /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml
