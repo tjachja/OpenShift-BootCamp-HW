@@ -10,9 +10,15 @@
   tasks:
     - debug:
         msg: "Step 000 Pre Infrastructure - Copying inventory file to /etc/ansible/hosts"
-    - name: example copying file with owner and permissions
-      copy:
-        src: ./inventory/hosts
+    - debug:
+        msg: "hi {{ guid }}"
+    - copy:
+        src: /root/OpenShift-BootCamp-HW/files/ocp-ha-lab/files/hosts
         dest: /etc/ansible/hosts
-    - shell: ansible-playbook -f 20 /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml
-    - shell: ansible-playbook -f 20 /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml
+        force: yes
+    - replace:
+        path: /etc/ansible/hosts
+        regexp: "[$]GUID"
+        replace: "{{ guid }}"
+        backup: yes
+

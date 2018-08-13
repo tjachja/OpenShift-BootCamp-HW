@@ -1,48 +1,3 @@
-###########################################################################
-### OpenShift Hosts
-###########################################################################
-[OSEv3:children]
-lb
-masters
-etcd
-nodes
-nfs
-#glusterfs
-
-[lb]
-loadbalancer1.$GUID.internal
-
-[masters]
-master1.$GUID.internal
-master2.$GUID.internal
-master3.$GUID.internal
-
-[etcd]
-master1.$GUID.internal
-master2.$GUID.internal
-master3.$GUID.internal
-
-[nodes]
-## These are the masters
-master1.$GUID.internal openshift_hostname=master1.$GUID.internal  openshift_node_labels="{'env': 'master', 'cluster': '$GUID'}"
-master2.$GUID.internal openshift_hostname=master2.$GUID.internal  openshift_node_labels="{'env': 'master', 'cluster': '$GUID'}"
-master3.$GUID.internal openshift_hostname=master3.$GUID.internal  openshift_node_labels="{'env': 'master', 'cluster': '$GUID'}"
-
-## These are infranodes
-infranode1.$GUID.internal openshift_hostname=infranode1.$GUID.internal  openshift_node_labels="{'env':'infra', 'cluster': '$GUID'}"
-infranode2.$GUID.internal openshift_hostname=infranode2.$GUID.internal  openshift_node_labels="{'env':'infra', 'cluster': '$GUID'}"
-
-## These are regular nodes
-node1.$GUID.internal openshift_hostname=node1.$GUID.internal  openshift_node_labels="{'env':'app', 'cluster': '$GUID'}"
-node2.$GUID.internal openshift_hostname=node2.$GUID.internal  openshift_node_labels="{'env':'app', 'cluster': '$GUID'}"
-node3.$GUID.internal openshift_hostname=node3.$GUID.internal  openshift_node_labels="{'env':'app', 'cluster': '$GUID'}"
-node4.$GUID.internal openshift_hostname=node4.$GUID.internal  openshift_node_labels="{'env':'app', 'cluster': '$GUID'}"
-
-## These are CNS nodes
-# support1.$GUID.internal openshift_hostname=support1.$GUID.internal  openshift_node_labels="{'env':'glusterfs', 'cluster': '$GID.internal glusterfs_devices='[ "/dev/xvdd" ]'
-
-
-
 [OSEv3:vars]
 
 ###########################################################################
@@ -102,15 +57,12 @@ os_sdn_network_plugin_name='redhat/openshift-ovs-networkpolicy'
 ###########################################################################
 openshift_master_identity_providers=[{'name': 'htpasswd_provider', 'challenge': 'true', 'login': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'provider': {'apiVersion':'v1', 'kind': 'HTPasswdPasswordIdentityProvider', 'file': '/root/htpasswd.openshift'}}]
 
-#openshift_master_identity_providers=[{'name': 'ldap', 'challenge': 'true', 'login': 'true', 'kind': 'LDAPPasswordIdentityProvider','attributes': {'id': ['dn'], 'email': ['mail'], 'name': ['cn'], 'preferredUsername': ['uid']}, 'bindDN': 'uid=admin,cn=users,cn=accounts,dc=shared,dc=example,dc=opentlc,dc=com', 'bindPassword': 'r3dh4t1!', 'ca': '/etc/origin/master/ipa-ca.crt','insecure': 'false', 'url': 'ldaps://ipa.shared.example.opentlc.com:636/cn=users,cn=accounts,dc=shared,dc=example,dc=opentlc,dc=com?uid?sub?(memberOf=cn=ocp-users,cn=groups,cn=accounts,dc=shared,dc=example,dc=opentlc,dc=com)'}]
-openshift_master_ldap_ca_file=/root/ipa-ca.crt
-
 ###########################################################################
 ### OpenShift Router and Registry Vars
 ###########################################################################
 
 openshift_hosted_router_replicas=2
-# openshift_hosted_router_certificate={"certfile": "/path/to/router.crt", "keyfile": "/path/to/router.key", "cafile": "/path/to/router-ca.crt"}
+
 
 openshift_hosted_registry_replicas=1
 
@@ -180,4 +132,45 @@ openshift_logging_es_cluster_size=1
 openshift_logging_es_nodeselector={"env":"infra"}
 openshift_logging_kibana_nodeselector={"env":"infra"}
 openshift_logging_curator_nodeselector={"env":"infra"}
+
+###########################################################################
+### OpenShift Hosts
+###########################################################################
+[OSEv3:children]
+lb
+masters
+etcd
+nodes
+
+[lb]
+loadbalancer1.$GUID.internal
+
+[masters]
+master1.$GUID.internal
+master2.$GUID.internal
+master3.$GUID.internal
+
+[etcd]
+master1.$GUID.internal
+master2.$GUID.internal
+master3.$GUID.internal
+
+[nodes]
+## These are the masters
+master1.$GUID.internal openshift_hostname=master1.$GUID.internal  openshift_node_labels="{'env': 'master', 'cluster': '$GUID'}"
+master2.$GUID.internal openshift_hostname=master2.$GUID.internal  openshift_node_labels="{'env': 'master', 'cluster': '$GUID'}"
+master3.$GUID.internal openshift_hostname=master3.$GUID.internal  openshift_node_labels="{'env': 'master', 'cluster': '$GUID'}"
+
+## These are infranodes
+infranode1.$GUID.internal openshift_hostname=infranode1.$GUID.internal  openshift_node_labels="{'env':'infra', 'cluster': '$GUID'}"
+infranode2.$GUID.internal openshift_hostname=infranode2.$GUID.internal  openshift_node_labels="{'env':'infra', 'cluster': '$GUID'}"
+
+## These are regular nodes
+node1.$GUID.internal openshift_hostname=node1.$GUID.internal  openshift_node_labels="{'env':'app', 'cluster': '$GUID'}"
+node2.$GUID.internal openshift_hostname=node2.$GUID.internal  openshift_node_labels="{'env':'app', 'cluster': '$GUID'}"
+node3.$GUID.internal openshift_hostname=node3.$GUID.internal  openshift_node_labels="{'env':'app', 'cluster': '$GUID'}"
+node4.$GUID.internal openshift_hostname=node4.$GUID.internal  openshift_node_labels="{'env':'app', 'cluster': '$GUID'}"
+
+## These are CNS nodes
+# support1.$GUID.internal openshift_hostname=support1.$GUID.internal  openshift_node_labels="{'env':'glusterfs', 'cluster': '$GUID.internal glusterfs_devices='[ "/dev/xvdd" ]'
 

@@ -6,14 +6,13 @@
 ################################################################################
 ################################################################################
 
-- import_playbook: "./ocp-ha-lab/pre_infra.yml"
+- import_playbook: "./files/ocp-ha-lab/pre_infra.yml"
   tags:
     - step000
     - pre_infra_tasks
 
-- import_playbook: "/usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml"
 - import_playbook: "/usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml"
-- import_playbook: "./ocp-ha-lab/pre_infra.yml"
+- import_playbook: "./files/ocp-ha-lab/pre_infra.yml"
   tags:
     - step001
     - deploy
