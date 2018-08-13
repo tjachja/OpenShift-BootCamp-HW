@@ -10,8 +10,6 @@
   tasks:
     - debug:
         msg: "Step 000 Pre Infrastructure - Copying inventory file to /etc/ansible/hosts"
-    - debug:
-        msg: "hi {{ guid }}"
     - copy:
         src: /root/OpenShift-BootCamp-HW/files/ocp-ha-lab/files/hosts
         dest: /etc/ansible/hosts
@@ -21,4 +19,8 @@
         regexp: "[$]GUID"
         replace: "{{ guid }}"
         backup: yes
-
+    - debug: msg="the value of foo.txt is {{lookup('file', '/etc/ansible/hosts') }}"
+    - name: display multiple file contents
+      debug: var=item
+      with_file:
+        - "/etc/ansible/hosts"
