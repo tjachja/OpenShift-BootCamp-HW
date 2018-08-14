@@ -33,9 +33,9 @@ openshift_master_api_port=443
 openshift_master_console_port=443
 
 openshift_master_cluster_method=native
-openshift_master_cluster_hostname=loadbalancer1.$GUID.internal
-openshift_master_cluster_public_hostname=loadbalancer.$GUID.example.opentlc.com
-openshift_master_default_subdomain=apps.$GUID.example.opentlc.com
+openshift_master_cluster_hostname=loadbalancer1.0629.internal
+openshift_master_cluster_public_hostname=loadbalancer.0629.example.opentlc.com
+openshift_master_default_subdomain=apps.0629.example.opentlc.com
 #openshift_master_ca_certificate={'certfile': '/root/intermediate_ca.crt', 'keyfile': '/root/intermediate_ca.key'}
 openshift_master_overwrite_named_certificates=True
 
@@ -55,8 +55,7 @@ os_sdn_network_plugin_name='redhat/openshift-ovs-multitenant'
 ###########################################################################
 ### OpenShift Authentication Vars
 
-openshift_master_identity_providers=[{'name': 'htpasswd_auth','login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider',
-	'filename': '/root/htpasswd.openshift'}]
+openshift_master_identity_providers=[{'name': 'htpasswd_auth','login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider','filename': '/root/htpasswd.openshift'}]
 
 ###########################################################################
 ### OpenShift Router and Registry Vars
@@ -127,7 +126,7 @@ openshift_logging_storage_volume_name=logging
 openshift_logging_storage_volume_size=10Gi
 openshift_logging_storage_labels={'storage': 'logging'}
 
-# openshift_logging_kibana_hostname=kibana.apps.$GUID.example.opentlc.com
+# openshift_logging_kibana_hostname=kibana.apps.0629.example.opentlc.com
 openshift_logging_es_cluster_size=1
 
 openshift_logging_es_nodeselector={\"env\":\"infra\"}
@@ -144,33 +143,34 @@ etcd
 nodes
 
 [lb]
-loadbalancer1.$GUID.internal
+loadbalancer1.0629.internal
 
 [masters]
-master1.$GUID.internal
-master2.$GUID.internal
-master3.$GUID.internal
+master1.0629.internal
+master2.0629.internal
+master3.0629.internal
 
 [etcd]
-master1.$GUID.internal
-master2.$GUID.internal
-master3.$GUID.internal
+master1.0629.internal
+master2.0629.internal
+master3.0629.internal
 
 [nodes]
 ## These are the masters
-master1.$GUID.internal openshift_hostname=master1.$GUID.internalopenshift_node_labels=\"{'env': 'master', 'cluster': '$GUID'}\"
-master2.$GUID.internal openshift_hostname=master2.$GUID.internalopenshift_node_labels=\"{'env': 'master', 'cluster': '$GUID'}\"
-master3.$GUID.internal openshift_hostname=master3.$GUID.internalopenshift_node_labels=\"{'env': 'master', 'cluster': '$GUID'}\"
+master1.0629.internal openshift_hostname=master1.0629.internalopenshift_node_labels=\"{'env': 'master', 'cluster': '0629'}\"
+master2.0629.internal openshift_hostname=master2.0629.internalopenshift_node_labels=\"{'env': 'master', 'cluster': '0629'}\"
+master3.0629.internal openshift_hostname=master3.0629.internalopenshift_node_labels=\"{'env': 'master', 'cluster': '0629'}\"
 
 ## These are infranodes
-infranode1.$GUID.internal openshift_hostname=infranode1.$GUID.internalopenshift_node_labels=\"{'env':'infra', 'cluster': '$GUID'}\"
-infranode2.$GUID.internal openshift_hostname=infranode2.$GUID.internalopenshift_node_labels=\"{'env':'infra', 'cluster': '$GUID'}\"
+infranode1.0629.internal openshift_hostname=infranode1.0629.internalopenshift_node_labels=\"{'env':'infra', 'cluster': '0629'}\"
+infranode2.0629.internal openshift_hostname=infranode2.0629.internalopenshift_node_labels=\"{'env':'infra', 'cluster': '0629'}\"
 
 ## These are regular nodes
-node1.$GUID.internal openshift_hostname=node1.$GUID.internalopenshift_node_labels=\"{'env':'app', 'cluster': '$GUID'}\"
-node2.$GUID.internal openshift_hostname=node2.$GUID.internalopenshift_node_labels=\"{'env':'app', 'cluster': '$GUID'}\"
-node3.$GUID.internal openshift_hostname=node3.$GUID.internalopenshift_node_labels=\"{'env':'app', 'cluster': '$GUID'}\"
-node4.$GUID.internal openshift_hostname=node4.$GUID.internalopenshift_node_labels=\"{'env':'app', 'cluster': '$GUID'}\"
-
+node1.0629.internal openshift_hostname=node1.0629.internalopenshift_node_labels=\"{'env':'app', 'cluster': '0629'}\"
+node2.0629.internal openshift_hostname=node2.0629.internalopenshift_node_labels=\"{'env':'app', 'cluster': '0629'}\"
+node3.0629.internal openshift_hostname=node3.0629.internalopenshift_node_labels=\"{'env':'app', 'cluster': '0629'}\"
+node4.0629.internal openshift_hostname=node4.0629.internalopenshift_node_labels=\"{'env':'app', 'cluster': '0629'}\"
+[nfs]
 ## These are CNS nodes
-# support1.$GUID.internal openshift_hostname=support1.$GUID.internalopenshift_node_labels=\"{'env':'glusterfs', 'cluster': '$GUID.internal glusterfs_devices='[ \"/dev/xvdd\" ]'"
+support1.0629.internal openshift_hostname=support1.0629.internalopenshift_node_labels=\"{'env':'glusterfs', 'cluster': '0629.internal glusterfs_devices='[ \"/dev/xvdd\" ]'"
+
