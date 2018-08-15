@@ -1,12 +1,19 @@
 - name: Step 002 Post Infrastructure
-  hosts: all
+  hosts: localhost
   vars_files:
     - "./env_vars.yml"
   become: false
   tasks:
-    - name: Get Kube File
     - script: files/kube.sh
-    - name: Create persistent volumes
-    - script: files/pv.sh
-      run_once: true
-      delegate_to: support1.{{ guid }}.internal
+- hosts: support1.{{guid}}.internal
+  connection: local
+  become: true
+  tasks:  
+    - copy:
+        src: /root/OpenShift-BootCamp-HW/files/ocp-ha-lab/files/pv.sh
+        dest: /root/pv.sh
+    - name: Start application
+      shell: "/root/pv.sh"
+      args:
+        chdir: "/root"
+        executable: "/bin/bash"
