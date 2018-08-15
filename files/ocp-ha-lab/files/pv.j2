@@ -15,6 +15,6 @@ spec:
   nfs:
     path: /srv/nfs/user-vols/vol{{pv}}
     server: support1.{{guid}}.internal
-  persistentVolumeReclaimPolicy: {{ persistentVolumeReclaimPolicy }}
+  persistentVolumeReclaimPolicy: "Recycle"
 ---
 {% endfor %}
