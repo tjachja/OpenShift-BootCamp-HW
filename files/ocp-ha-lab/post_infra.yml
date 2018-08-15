@@ -1,6 +1,5 @@
 - name: Step 002 Post Infrastructure
-  hosts: localhost
-  connection: local
+  hosts: all
   vars_files:
     - "./env_vars.yml"
   become: false
