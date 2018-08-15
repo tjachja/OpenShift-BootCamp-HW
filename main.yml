@@ -11,6 +11,4 @@
     - pre_infra_tasks
 - import_playbook: "/usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml"
 - import_playbook: "./files/ocp-ha-lab/post_infra.yml"
-  tags:
-    - step001
-    - post_infra_tasks
+
