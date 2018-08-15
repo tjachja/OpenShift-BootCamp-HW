@@ -5,5 +5,25 @@
     - "./env_vars.yml"
   become: false
   tasks:
-    - name: Create persistent volumes
-      script: files/pv.sh
+    - debug:
+      msg: " Post Infrastructure - Creating persistent volumes"
+    - name: Generate user vol PV file
+      template:
+        src: "/files/pv.j2"
+        dest: "/root/userpvs-{{ guid }}.yml"
+      tags:
+        - gen_user_vol_pv
+        - openshift_nfs_config
+
+    - shell: 'oc create -f /root/pvs-{{ guid }}.yml || oc replace -f /root/pvs-{{ guid }}.yml'
+      tags:
+        - create_user_pv
+      when: pv_list.0 is defined
+      tags:
+        - openshift_nfs_config
+
+    - shell: 'oc create -f /root/userpvs-{{ guid }}.yml || oc replace -f /root/userpvs-{{ guid }}.yml'
+      tags:
+        - create_user_pv
+        - openshift_nfs_config
+
