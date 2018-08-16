@@ -13,7 +13,7 @@
         src: /root/OpenShift-BootCamp-HW/files/ocp-ha-lab/files/pv.sh
         dest: /root/pv.sh
     - name: Start application
-      shell: "/root/pv.sh"
+      command: bash /root/pv.sh
       args:
         chdir: "/root"
-        executable: "/bin/bash"
+        executable: /bin/bash
