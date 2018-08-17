@@ -5,69 +5,15 @@
   become: false
   tasks:
     - script: files/kube.sh
-- name: Configure NFS host for user-vols if required
-  hosts: support
-  gather_facts: False
-  become: yes
-  tasks:
-    - name: Create user vols
-      shell: "mkdir -p /srv/nfs/user-vols/vol{1..{{user_vols}}}"
-      tags:
-        - openshift_nfs_config
-    - name: chmod the user vols
-      shell: "chmod -R 777 /srv/nfs/user-vols"
-      tags:
-        - openshift_nfs_config
-
-- name: Step lab post software deployment
-  hosts: localhost
-  gather_facts: False
-  become: yes
-  tags:
-## Create PVs for uservols if required
-    - name: get nfs Hostname
-      set_fact:
-        nfs_host: "{{ groups['support']|sort|first }}"
-      tags:
-        - openshift_nfs_config
-    - set_fact:
-        pv_size: '10Gi'
-        pv_list: "{{ ocp_pvs }}"
-        persistentVolumeReclaimPolicy: Retain
-      tags:
-        - openshift_nfs_config
-    - name: Generate PV file
-      template:
-        src: "files/pvs.j2"
-        dest: "/root/pvs-{{ guid }}.yml"
-      tags: [ gen_pv_file ]
-      when: pv_list.0 is defined
-      tags:
-        - openshift_nfs_config
-    - set_fact:
-        pv_size: "{{user_vols_size}}"
-        persistentVolumeReclaimPolicy: Recycle
-      tags:
-        - openshift_nfs_config
-      notify: restart nfs services
-      run_once: True
-
-    - name: Generate user vol PV file
-      template:
-        src: "files/userpvs.j2"
-        dest: "/root/userpvs-{{ guid }}.yml"
-      tags:
-        - gen_user_vol_pv
-        - openshift_nfs_config
-
-    - shell: 'oc create -f /root/pvs-{{ guid }}.yml || oc replace -f /root/pvs-{{ guid }}.yml'
-      tags:
-        - create_user_pv
-      when: pv_list.0 is defined
-      tags:
-        - openshift_nfs_config
-
-    - shell: 'oc create -f /root/userpvs-{{ guid }}.yml || oc replace -f /root/userpvs-{{ guid }}.yml'
-      tags:
-        - create_user_pv
-        - openshift_nfs_config
+- hosts: support1.{{guid}}.internal
+  become: true
+  tasks:  
+    - name: Transfer file from ServerA to ServerB
+      synchronize:
+        src: /root/OpenShift-BootCamp-HW/files/ocp-ha-lab/files/pv.sh
+        dest: /root/pv.sh
+      delegate_to: localhost
+    - name: Start application
+      command: ./pv.sh
+      args:
+        executable: /bin/bash
