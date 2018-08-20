@@ -4,7 +4,8 @@
     - "./env_vars.yml"
   become: false
   tasks:
-    - script: files/kube.sh
+    - name: Migrate Kube file 
+      script: files/kube.sh
 
 - name: Create Persistent Volumes
   hosts: nfs
@@ -18,16 +19,11 @@
   become: false
   tasks:
     - name: Claim PVs
-      command: files/userpvs.sh
-      args:
-        executable: /bin/bash
+      script: files/userpvs.sh
+    
     - name: Enviroment Configuration - NetworkPolicy is configured and working with projects isolated by default
-      command: files/networkpolicy.sh
-      args:
-        executable: /bin/bash
+      script: ./files/networkpolicy.sh
+     
     - name: Multitenancy Requirements
-      command: files/multitenancy.sh
-      args:
-        executable: /bin/bash
-
+      script: ./files/multitenancy.sh
 

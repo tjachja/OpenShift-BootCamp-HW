@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 ansible masters -m shell -a 'htpasswd -b /etc/origin/master/htpasswd Amy r3dh4t1!'
 ansible masters -m shell -a 'htpasswd -b /etc/origin/master/htpasswd Andrew r3dh4t1!'
 ansible masters -m shell -a 'htpasswd -b /etc/origin/master/htpasswd Brian r3dh4t1!'
