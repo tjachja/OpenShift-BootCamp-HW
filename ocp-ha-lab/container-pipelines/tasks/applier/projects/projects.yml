@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: List
+items:
+- kind: ProjectRequest
+  apiVersion: v1
+  metadata:
+    name: tasks-build
+    creationTimestam: null
+  displayName: Tasks App - Build
+- kind: ProjectRequest
+  apiVersion: v1
+  metadata:
+    name: tasks-dev
+    creationTimestam: null
+  displayName: Tasks App - Dev
+- kind: ProjectRequest
+  apiVersion: v1
+  metadata:
+    name: tasks-stage
+    creationTimestam: null
+  displayName: Tasks App - Stage
+- kind: ProjectRequest
+  apiVersion: v1
+  metadata:
+    name: tasks-prod
+    creationTimestam: null
+  displayName: Tasks App - Prod
