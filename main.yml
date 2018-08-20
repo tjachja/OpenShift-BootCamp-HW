@@ -7,7 +7,11 @@
 ################################################################################
 - import_playbook: "./files/ocp-ha-lab/pre_infra.yml"
 
-- import_playbook: "/usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml"
+- name: Execute prerequisites
+  import_playbook: /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml
+
+- name: Execute deploy_cluste
+  import_playbook: /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml
 
 - import_playbook: "./files/ocp-ha-lab/post_infra.yml"
 
