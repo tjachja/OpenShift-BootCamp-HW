@@ -6,7 +6,10 @@
 ################################################################################
 ################################################################################
 - import_playbook: "./files/ocp-ha-lab/pre_infra.yml"
+
 - import_playbook: "/usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml"
+
 - import_playbook: "./files/ocp-ha-lab/post_infra.yml"
-- import_playbook: "./files/ocp-ha-lab/software.yml"
+
+# - import_playbook: "./files/ocp-ha-lab/software.yml"
 

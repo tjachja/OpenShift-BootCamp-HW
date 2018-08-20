@@ -33,5 +33,9 @@
       command: files/networkpolicy.sh
       args:
         executable: /bin/bash
+    - name: Multitenancy Requirements
+      command: files/multitenancy.sh
+      args:
+        executable: /bin/bash
 
 
