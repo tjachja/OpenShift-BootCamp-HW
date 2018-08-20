@@ -12,7 +12,7 @@
   tasks:  
     - name: Transfer file from bastion to support1 node
       synchronize:
-        src: /root/OpenShift-BootCamp-HW/files/ocp-ha-lab/files/pv.sh
+        src: /root/OpenShift-BootCamp-HW/ocp-ha-lab/files/pv.sh
         dest: /root/pv.sh
       delegate_to: localhost
     - name: Start application

@@ -5,15 +5,15 @@
 ############ Step 000 Pre Infrastructure Deploy Tasks
 ################################################################################
 ################################################################################
-- import_playbook: "./files/ocp-ha-lab/pre_infra.yml"
+- import_playbook: "./ocp-ha-lab/pre_infra.yml"
 
 - name: Execute prerequisites
   import_playbook: /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml
 
-- name: Execute deploy_cluste
+- name: Execute deploy_cluster
   import_playbook: /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml
 
-- import_playbook: "./files/ocp-ha-lab/post_infra.yml"
+- import_playbook: "./ocp-ha-lab/post_infra.yml"
 
-# - import_playbook: "./files/ocp-ha-lab/software.yml"
+# - import_playbook: "./ocp-ha-lab/software.yml"
 

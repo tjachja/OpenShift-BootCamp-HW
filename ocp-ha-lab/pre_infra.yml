@@ -7,7 +7,7 @@
   tasks:
     - name: Copy inventory file to /etc/ansible/hosts
       copy:
-        src: /root/OpenShift-BootCamp-HW/files/ocp-ha-lab/files/hosts
+        src: /root/OpenShift-BootCamp-HW/ocp-ha-lab/files/hosts
         dest: /etc/ansible/hosts
         force: yes
     - replace:
