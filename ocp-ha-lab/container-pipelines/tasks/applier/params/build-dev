@@ -1,4 +1,0 @@
-APPLICATION_NAME=tasks
-NAMESPACE=tasks-build
-SOURCE_REPOSITORY_URL=https://github.com/wkulhanek/openshift-tasks.git
-SOURCE_REPOSITORY_REF=master
