@@ -1,0 +1,37 @@
+- name: Post Infrastructure
+  hosts: localhost
+  vars_files:
+    - "./env_vars.yml"
+  become: false
+  tasks:
+    - script: files/kube.sh
+
+- name: Create Persistent Volumes
+  hosts: support1.{{guid}}.internal
+  become: true
+  tasks:  
+    - name: Transfer file from bastion to support1 node
+      synchronize:
+        src: /root/OpenShift-BootCamp-HW/files/ocp-ha-lab/files/pv.sh
+        dest: /root/pv.sh
+      delegate_to: localhost
+    - name: Start application
+      command: ./pv.sh
+      args:
+        executable: /bin/bash
+
+- hosts: localhost
+  vars_files:
+    - "./env_vars.yml"
+  become: false
+  tasks:
+    - name: Claim PVs
+      command: files/userps.sh
+      args:
+        executable: /bin/bash
+    - name: Enviroment Configuration - NetworkPolicy is configured and working with projects isolated by default
+      command: files/networkpolicy.sh
+      args:
+        executable: /bin/bash
+
+

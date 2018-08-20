@@ -1,0 +1,13 @@
+---
+- name: CICD pipeline creation
+  hosts: localhost
+  gather_facts: false
+  become: true
+  tasks:
+    - command: files/cicd.sh
+      args:
+        executable: /bin/bash
+    - name: Enviroment Configuration - NetworkPolicy is configured and working with projects isolated by default
+      command: files/networkpolicy.sh
+      args:
+        executable: /bin/bash

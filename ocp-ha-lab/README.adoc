@@ -1,12 +1,3 @@
-= OPENTLC OCP-HA-LAB Env_Type config
-
-For example, we will include things such as ec2 instance names, secret
-variables such as private/public key pair information, passwords, etc.
-
-Eventually, all sensitive information will be encrypted via Ansible Vault. The
-inclusion as well as instructions on doing this will be included in a later
-release.
-
 == Set up your "Secret" variables
 
 * You need to provide some credentials for deployments to work

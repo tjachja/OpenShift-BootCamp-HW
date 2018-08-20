@@ -9,7 +9,7 @@
     - pre_infrastructure
   tasks:
     - debug:
-        msg: "Step 000 Pre Infrastructure - Copying inventory file to /etc/ansible/hosts"
+        msg: "Copying inventory file to /etc/ansible/hosts"
     - copy:
         src: /root/OpenShift-BootCamp-HW/files/ocp-ha-lab/files/hosts
         dest: /etc/ansible/hosts
