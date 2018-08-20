@@ -7,18 +7,10 @@
     - script: files/kube.sh
 
 - name: Create Persistent Volumes
-  hosts: support1.{{guid}}.internal
-  become: true
+  hosts: nfs
   tasks:  
-    - name: Transfer file from bastion to support1 node
-      synchronize:
-        src: /root/OpenShift-BootCamp-HW/ocp-ha-lab/files/pv.sh
-        dest: /root/pv.sh
-      delegate_to: localhost
-    - name: Start application
-      command: ./pv.sh
-      args:
-        executable: /bin/bash
+    - name: Create PVs
+      script: ./files/pv.sh
 
 - hosts: localhost
   vars_files:
@@ -26,7 +18,7 @@
   become: false
   tasks:
     - name: Claim PVs
-      command: files/userps.sh
+      command: files/userpvs.sh
       args:
         executable: /bin/bash
     - name: Enviroment Configuration - NetworkPolicy is configured and working with projects isolated by default
