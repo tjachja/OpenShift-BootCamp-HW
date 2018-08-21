@@ -1,9 +1,4 @@
 openshift_cluster_content:
-- object: projects
-  content:
-  - name: "create environments"
-    file: "{{ inventory_dir }}/../projects/projects.yml"
-    file_action: create
 - object: deployments
   content:
   - name: "deploy dev environment"
