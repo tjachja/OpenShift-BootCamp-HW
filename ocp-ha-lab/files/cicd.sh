@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 oc login -u andrew -p r3dh4t1!
 ## 1. Create Lifecycle Stages
-oc create -f applier/projects/projects.yml
+oc create -f ../container-pipelines/tasks/applier/projects/projects.yml
 
 ## 2. Stand up Jenkins master in dev
 oc new-app jboss-eap70-openshift:1.6~https://github.com/wkulhanek/openshift-tasks
