@@ -39,13 +39,10 @@ openshift_enable_unsupported_configurations=True
 ### OpenShift Network Vars
 ###########################################################################
 
-#osm_cluster_network_cidr=10.1.0.0/16
-#openshift_portal_net=172.30.0.0/16
-
 os_sdn_network_plugin_name='redhat/openshift-ovs-networkpolicy'
 #os_sdn_network_plugin_name='redhat/openshift-ovs-subnet'
 
-openshift_master_admission_plugin_config={"ProjectRequestLimit":{"configuration":{"apiVersion":"v1","kind":"ProjectRequestLimitConfig","limits":[{"selector":{"matchLabels":{"client": "alpha"}},{"maxProjects":"6"}]}}}
+openshift_master_admission_plugin_config={"ProjectRequestLimit":{"configuration":{"apiVersion":"v1","kind":"ProjectRequestLimitConfig","limits":[{"selector":{"client":"alpha"}},{"maxProjects":"1"}]}}}
 
 
 ###########################################################################
@@ -186,7 +183,6 @@ masters
 etcd
 nodes
 nfs
-#glusterfs
 
 [lb]
 loadbalancer1.$GUID.internal
@@ -212,17 +208,12 @@ infranode1.$GUID.internal openshift_hostname=infranode1.$GUID.internal  openshif
 infranode2.$GUID.internal openshift_hostname=infranode2.$GUID.internal  openshift_node_labels="{'env':'infra', 'cluster': '$GUID'}"
 
 ## These are regular nodes
-node1.$GUID.internal openshift_hostname=node1.$GUID.internal  openshift_node_labels="{'env':'app', 'cluster': '$GUID'}"
-node2.$GUID.internal openshift_hostname=node2.$GUID.internal  openshift_node_labels="{'env':'app', 'cluster': '$GUID'}"
-node3.$GUID.internal openshift_hostname=node3.$GUID.internal  openshift_node_labels="{'env':'app', 'cluster': '$GUID'}"
+node1.$GUID.internal openshift_hostname=node1.$GUID.internal  openshift_node_labels="{'client':'alpha', 'env':'app', 'cluster': '$GUID'}"
+node2.$GUID.internal openshift_hostname=node2.$GUID.internal  openshift_node_labels="{'client':'beta', 'env':'app', 'cluster': '$GUID'}"
+node3.$GUID.internal openshift_hostname=node3.$GUID.internal  openshift_node_labels="{'client':'common', 'env':'app', 'cluster': '$GUID'}"
 node4.$GUID.internal openshift_hostname=node4.$GUID.internal  openshift_node_labels="{'env':'app', 'cluster': '$GUID'}"
-
-## These are CNS nodes
-# support1.$GUID.internal openshift_hostname=support1.$GUID.internal  openshift_node_labels="{'env':'glusterfs', 'cluster': '$GUID'}"
 
 [nfs]
 support1.$GUID.internal openshift_hostname=support1.$GUID.internal
 
-#[glusterfs]
-# support1.$GUID.internal glusterfs_devices='[ "/dev/xvdd" ]'
 
