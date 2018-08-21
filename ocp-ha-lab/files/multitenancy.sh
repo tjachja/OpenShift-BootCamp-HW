@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # multiple clients created 
+oc login -u system:admin -n default
 
 ansible masters -m shell -a 'htpasswd -b /etc/origin/master/htpasswd Amy r3dh4t1!'
 ansible masters -m shell -a 'htpasswd -b /etc/origin/master/htpasswd Andrew r3dh4t1!'
@@ -35,5 +36,3 @@ oc create -f $pwd -n default
 ansible masters -m shell -a "sed -i 's/projectRequestTemplate.*/projectRequestTemplate\: \"default\/project-request\"/g' /etc/origin/master/master-config.yaml"
 ansible masters -m shell -a'systemctl restart atomic-openshift-master-api'
 ansible masters -m shell -a'systemctl restart atomic-openshift-master-controllers'
-
-# new user template is used to create a user object with specific label value:
