@@ -29,7 +29,7 @@
 - name: Build inventory file 
   hosts: localhost
   connection: local
-  become: false
+  become: true
   vars_files:
     - "./env_vars.yml"
   tasks:
