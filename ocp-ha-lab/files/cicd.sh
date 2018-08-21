@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 echo '************\nSetting up CI/CD Pipeline\n************'
 oc new-project cicd
@@ -14,7 +15,7 @@ oc create -f applier/projects/projects.yml
 oc new-app jboss-eap70-openshift:1.6~https://github.com/wkulhanek/openshift-tasks
 oc process openshift//jenkins-persistent | oc apply -f- -n tasks-build
 ## 3. Instantiate Pipeline
-oc process -f applier/templates/deployment.yml --param-file=applier/params/deployment-dev | oc apply -f-
-oc process -f applier/templates/deployment.yml --param-file=applier/params/deployment-stage | oc apply -f-
-oc process -f applier/templates/deployment.yml --param-file=applier/params/deployment-prod | oc apply -f-
-oc process -f applier/templates/build.yml --param-file applier/params/build-dev | oc apply -f-
+oc process -f ../container-pipelines/tasks/applier/templates/deployment.yml --param-file=../container-pipelines/tasks/applier/params/deployment-dev | oc apply -f-
+oc process -f ../container-pipelines/tasks/applier/templates/deployment.yml --param-file=../container-pipelines/tasks/applier/params/deployment-stage | oc apply -f-
+oc process -f ../container-pipelines/tasks/applier/templates/deployment.yml --param-file=../container-pipelines/tasks/applier/params/deployment-prod | oc apply -f-
+oc process -f ../container-pipelines/tasks/applier/templates/build.yml --param-file applier/params/build-dev | oc apply -f-
