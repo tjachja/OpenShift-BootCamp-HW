@@ -4,6 +4,13 @@ metadata:
   creationTimestamp: null
   name: project-request
 objects:
+- kind: NetworkPolicy
+  apiVersion: networking.k8s.io/v1
+  metadata:
+    name: deny-by-default
+  spec:
+    podSelector:
+    ingress: []
 - apiVersion: project.openshift.io/v1
   kind: Project
   metadata:

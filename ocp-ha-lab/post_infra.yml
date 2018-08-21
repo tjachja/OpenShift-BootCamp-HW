@@ -20,9 +20,6 @@
   tasks:
     - name: Claim PVs
       script: files/userpvs.sh
-    
-    - name: Enviroment Configuration - NetworkPolicy is configured and working with projects isolated by default
-      script: ./files/networkpolicy.sh
      
     - name: Multitenancy Requirements
       script: ./files/multitenancy.sh
