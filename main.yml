@@ -15,5 +15,5 @@
 
 - import_playbook: "./ocp-ha-lab/post_infra.yml"
 
-# - import_playbook: "./ocp-ha-lab/software.yml"
+- import_playbook: "./ocp-ha-lab/software.yml"
 
