@@ -27,11 +27,7 @@ oc create clusterquota clusterquota-$OCP_USERNAME \
 done
 
 # new project template is modified to include a LimitRange 
-
-pwd=`pwd`
-export pwd=$pwd/templates/template.yaml
-oc create -f $pwd -n default
-
+oc create -f /root/OpenShift-BootCamp-HW/ocp-ha-lab/files/templates/template.yaml -n default
 
 ansible masters -m shell -a "sed -i 's/projectRequestTemplate.*/projectRequestTemplate\: \"default\/project-request\"/g' /etc/origin/master/master-config.yaml"
 ansible masters -m shell -a'systemctl restart atomic-openshift-master-api'
