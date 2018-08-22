@@ -3,15 +3,15 @@
 # multiple clients created 
 oc login -u system:admin -n default
 
-ansible masters -m shell -a 'htpasswd -b /etc/origin/master/htpasswd Amy r3dh4t1!'
-ansible masters -m shell -a 'htpasswd -b /etc/origin/master/htpasswd Andrew r3dh4t1!'
-ansible masters -m shell -a 'htpasswd -b /etc/origin/master/htpasswd Brian r3dh4t1!'
-ansible masters -m shell -a 'htpasswd -b /etc/origin/master/htpasswd Betty r3dh4t1!'
+ansible masters -m shell -a 'htpasswd -b /etc/origin/master/htpasswd amy r3dh4t1!'
+ansible masters -m shell -a 'htpasswd -b /etc/origin/master/htpasswd andrew r3dh4t1!'
+ansible masters -m shell -a 'htpasswd -b /etc/origin/master/htpasswd brian r3dh4t1!'
+ansible masters -m shell -a 'htpasswd -b /etc/origin/master/htpasswd betty r3dh4t1!'
 
-oc adm groups new alpha Amy Andrew
-oc adm groups new beta Brian Betty
+oc adm groups new alpha amy andrew
+oc adm groups new beta brian betty
 
-for OCP_USERNAME in Amy Andrew Brian Betty; do
+for OCP_USERNAME in amy andrew brian betty; do
 
 oc create clusterquota clusterquota-$OCP_USERNAME \
  --project-annotation-selector=openshift.io/requester=$OCP_USERNAME \

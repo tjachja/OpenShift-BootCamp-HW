@@ -5,7 +5,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app: userreg
+      app: jenkins
   ingress:
   - ports:
     - protocol: TCP

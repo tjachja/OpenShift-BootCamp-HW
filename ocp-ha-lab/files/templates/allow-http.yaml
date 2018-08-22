@@ -1,0 +1,14 @@
+kind: NetworkPolicy
+apiVersion: extensions/v1bet1
+metadata:
+  name: allow-httpand-https-ns-a
+spec:
+  podSelector:
+    ingress:
+    - ports:
+      - protocol: TCP
+        port: 80
+      - protocol: TCP
+        port: 443
+    - from:
+      - podSelector: {}

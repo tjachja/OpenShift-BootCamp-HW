@@ -86,23 +86,23 @@ objects:
     limits:
       - type: Pod
         max:
-          cpu: 2
+          cpu: 1
           memory: 1Gi 
         min:
           cpu: 200m 
           memory: 6Mi 
       - type: Container
         max:
-          cpu: 2 
+          cpu: 1 
           memory: 1Gi 
         min:
-          cpu: 100m 
+          cpu: 200m 
           memory: 4Mi 
         default:
-          cpu: 2
+          cpu: 1
           memory: 1Gi 
         defaultRequest:
-          cpu: 2
+          cpu: 1
           memory: 1Gi 
 parameters:
 - name: PROJECT_NAME
