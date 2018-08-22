@@ -1,33 +1,20 @@
-# OpenShift-BootCamp-HW
+# OpenShift-BootCamp-HW Installation Steps 
 
 ## Review the Env_Type variable file
 
-* This file link:./env_vars.yml[./env_vars.yml] contains all the variables you
+This file link:./env_vars.yml[./env_vars.yml] contains all the variables you
  need to define to control the deployment of your environment.
 
 ## Running the Ansible Playbook
+1. Log into bastion host 
 
-. You can run the playbook with the following arguments to overwrite the default variable values:
-[source,bash]
-----
-# Set the your environment variables (this is optional, but makes life easy)
+2. Change user to root
+[xxxx@bastion ~]$ sudo -i
 
-REGION=ap-southeast-1
-KEYNAME=ocpkey
-GUID=testnewec21
-ENVTYPE="ocp-ha-lab"
-CLOUDPROVIDER=ec2v2
-HOSTZONEID='Z3IHLWJZOU9SRT'
-REPO_PATH='https://admin.example.com/repos/ocp/3.6/'
+3. Clone this repo
+[root@bastion ~]# git clone  https://github.com/tjachja/OpenShift-BootCamp-HW.git
 
-BASESUFFIX='.example.opentlc.com'
-IPAPASS=aaaaaa
-REPO_VERSION=3.6
-NODE_COUNT=2
-DEPLOYER_REPO_PATH=`pwd`
-LOG_FILE=$(pwd)/${ENVTYPE}-${GUID}.log
+[root@bastion ~]# cd Openshift-BootCamp-HW.git
 
-## For a HA environment that is not installed with OpenShift
-
-
-  ansible-playbook main.yml  -e "guid=${GUID}"
+4. Run ansible playbook with GUID
+[root@bastion ~]# ansible-playbook main.yml  -e "guid=${GUID}"
