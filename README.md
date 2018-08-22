@@ -21,3 +21,6 @@ This file link:./env_vars.yml[./env_vars.yml] contains all the variables you nee
 ```[root@bastion ~]# ansible-playbook main.yml  -e "guid=${GUID}"```
 
 Note: If installer fails the first time, rerun the command.
+
+### To View Jenkins 
+After installation to view the jenkins workflow go to https://loadbalancer1.da30.example.opentlc.com/console/ and log in as andrew with the password r3dh4t1!
