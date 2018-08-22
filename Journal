@@ -1,11 +1,61 @@
-OpenShift Advanced Deployment Bootcamp Homework Journal.
+OpenShift Advanced Deployment Bootcamp Homework Journal
 
-Basic Requirements section:
+This POC is a fully automated deployment of OpenShift. 
 
-HA Deployment section:
+A public GitHub repo of all the work can be found at https://github.com/tjachja/OpenShift-BootCamp-HW. Clone this work onto a homework enviroment bastion host and execute the steps mentioned in the README documentation. 
 
-Environment Configuration section:
+The main.yml called a few playbooks which included a pre_infra, the deployment playbook, a post_infra, and a software .yml file. 
 
-CICD Workflow section:
+## Basic Requirements ## 
+This work fulfills the Basic Requirements through the abilities of the cluster to:
+- authenticate at the master console
+- registry has storage attached and working
+- router is configured on each infranode
+- PVs of different types are available for users to consume
+- deploy a simple app (nodejs-mongo-persistent)
 
-Multitenancy section:
+this was done through a pre-built customizable inventory file. 
+
+## HA Deployment ##
+This work fulfills the HA Deployment Requirments through the following features:
+- There are three masters working
+- There are three etcd instances working
+- There is a load balancer to access the masters called loadbalancer.$GUID.$DOMAIN
+- There is a load balancer/DNS for both infranodes called *.apps.$GUID.$DOMAIN
+- There are at least two infranodes, labeled env=infra
+
+this was also done through a pre-built inventory file.
+
+## Environment Configuration ##
+This work fulfills the Enviroment Configuration through the following features:
+- NetworkPolicy is configured and working with projects isolated by default
+- Aggregated logging is configured and working
+- Metrics collection is configured and working
+- Router and Registry Pods run on Infranodes
+- Metrics and Logging components run on Infranodes
+- Service Catalog, Template Service Broker, and Ansible Service Broker are all working
+
+This was done through a pre-built inventory file which used nodeselectors and labels to run metrics and loggin on infranodes. The service brokers and the NetworkPolicy was configured in the inventory file as well. Projects were isolated by default using custom project-template which was configured to be used. This was done in the multitenancy.sh script which was called in the post-infra.yml file. 
+
+## CICD Workflow ##
+The cicid.sh file which was called in the software.yml playbook devlivered a number of these requirments: 
+- Jenkins pod is running with a persistent volume
+
+Also see container-pipelines/taks/applier files for the implementation of:
+- Jenkins deploys openshift-tasks app 
+- Jenkins OpenShift plugin is used to create a CICD workflow
+
+## Multitenancy ##
+
+The multitenancy.sh script which was called in the post-infra.yml file delivered a number of these requirements: 
+- Multiple Clients (customers) created
+- Clients will be named Alpha Corp and Beta Corp (client=alpha, client=beta)
+- Alpha Corp will have two users, Amy and Andrew
+- Beta Corp will have two users, Brian and Betty
+- The new project template is modified so that it includes a LimitRange
+The following requirements were addressed by the inventory file which used labels to:
+
+- Dedicate a node for each Client
+- admissionControl plugin set specific limits per label (client/customer)
+
+See the onboarding file for an on-boarding new client documentation explains how to create a new client/customer.

@@ -1,0 +1,5 @@
+To create a new user  with username and password use the command: 
+ansible masters -m shell -a 'htpasswd -b /etc/origin/master/htpasswd <username> <password>'
+
+To add a username as a new client/customer use the following command:
+oc adm groups new <client> <username>

@@ -19,3 +19,5 @@ This file link:./env_vars.yml[./env_vars.yml] contains all the variables you nee
 4. Run ansible playbook with GUID
 
 ```[root@bastion ~]# ansible-playbook main.yml  -e "guid=${GUID}"```
+
+Note: If installer fails the first time, rerun the command.
