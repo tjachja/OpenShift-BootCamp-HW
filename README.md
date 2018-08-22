@@ -14,7 +14,7 @@ This file link:./env_vars.yml[./env_vars.yml] contains all the variables you nee
 
 ```[root@bastion ~]# git clone  https://github.com/tjachja/OpenShift-BootCamp-HW.git```
 
-```[root@bastion ~]# cd Openshift-BootCamp-HW.git```
+```[root@bastion ~]# cd OpenShift-BootCamp-HW/```
 
 4. Run ansible playbook with GUID
 
