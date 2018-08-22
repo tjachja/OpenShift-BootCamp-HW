@@ -1,11 +1,11 @@
 # OpenShift-BootCamp-HW
 
-== Review the Env_Type variable file
+## Review the Env_Type variable file
 
 * This file link:./env_vars.yml[./env_vars.yml] contains all the variables you
  need to define to control the deployment of your environment.
 
-== Running Ansible Playbook
+## Running the Ansible Playbook
 
 . You can run the playbook with the following arguments to overwrite the default variable values:
 [source,bash]
